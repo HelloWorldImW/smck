@@ -22,8 +22,8 @@ class H5Lexer {
         let regexBlock = try! NSRegularExpression(pattern: annotationBlockPattern, options: NSRegularExpression.Options(rawValue:0))
         let regexLine = try! NSRegularExpression(pattern: annotationLinePattern, options: NSRegularExpression.Options(rawValue:0))
         var anStr = ""
-        anStr = regexLine.stringByReplacingMatches(in: str, options: NSRegularExpression.MatchingOptions(rawValue:0), range: NSMakeRange(0, str.characters.count), withTemplate: Sb.space)
-        anStr = regexBlock.stringByReplacingMatches(in: anStr, options: NSRegularExpression.MatchingOptions(rawValue:0), range: NSMakeRange(0, anStr.characters.count), withTemplate: Sb.space)
+        anStr = regexLine.stringByReplacingMatches(in: str, options: NSRegularExpression.MatchingOptions(rawValue:0), range: NSMakeRange(0, str.count), withTemplate: Sb.space)
+        anStr = regexBlock.stringByReplacingMatches(in: anStr, options: NSRegularExpression.MatchingOptions(rawValue:0), range: NSMakeRange(0, anStr.count), withTemplate: Sb.space)
         
         
         str = anStr.replacingOccurrences(of: "\n", with: "")
@@ -35,7 +35,7 @@ class H5Lexer {
         let annotationPattern = "<!.*?>" //匹配<!>这样的注释
         let regex = try! NSRegularExpression(pattern: annotationPattern, options: NSRegularExpression.Options(rawValue:0))
         
-        newStr = regex.stringByReplacingMatches(in: str, options: NSRegularExpression.MatchingOptions(rawValue:0), range: NSMakeRange(0, str.characters.count), withTemplate: H5Sb.space)
+        newStr = regex.stringByReplacingMatches(in: str, options: NSRegularExpression.MatchingOptions(rawValue:0), range: NSMakeRange(0, str.count), withTemplate: H5Sb.space)
         
         //提取<Style>标签
         let cssPattern = "<style>(.*?)</style>"
@@ -43,12 +43,12 @@ class H5Lexer {
         let matches = cssRegex.matches(in: newStr, options: [], range: NSMakeRange(0,NSString(string: newStr).length))
         var cssSelecorsStr = ""
         for re in matches {
-            cssSelecorsStr.append(NSString(string: newStr).substring(with: re.rangeAt(1)))
+            cssSelecorsStr.append(NSString(string: newStr).substring(with: re.range(at: 1)))
             //print("\(cssSelecorsStr)")
         }
         
         //提取完再将其替换成空
-        newStr = cssRegex.stringByReplacingMatches(in: newStr, options: NSRegularExpression.MatchingOptions(rawValue:0), range: NSMakeRange(0, newStr.characters.count), withTemplate: H5Sb.space)
+        newStr = cssRegex.stringByReplacingMatches(in: newStr, options: NSRegularExpression.MatchingOptions(rawValue:0), range: NSMakeRange(0, newStr.count), withTemplate: H5Sb.space)
         //print("\(newStr)")
         
         //将 css 的 selector 添加到 cssSelectors 里做好映射
@@ -64,10 +64,10 @@ class H5Lexer {
         let jsMatches = jsRegex.matches(in: newStr, options: [], range: NSMakeRange(0,NSString(string: newStr).length))
         var jsStr = ""
         for jsRe in jsMatches {
-            jsStr.append(NSString(string: newStr).substring(with: jsRe.rangeAt(1)))
+            jsStr.append(NSString(string: newStr).substring(with: jsRe.range(at: 1)))
         }
         //替换空
-        newStr = jsRegex.stringByReplacingMatches(in: newStr, options: NSRegularExpression.MatchingOptions(rawValue:0), range: NSMakeRange(0, newStr.characters.count), withTemplate: " ")
+        newStr = jsRegex.stringByReplacingMatches(in: newStr, options: NSRegularExpression.MatchingOptions(rawValue:0), range: NSMakeRange(0, newStr.count), withTemplate: " ")
         
         let jsTks = JSLexer(input: jsStr).lex()
         print("\(jsTks)")
@@ -110,7 +110,7 @@ class H5Lexer {
                 if keyMap.contains(charStr) {
                     quite = true
                 } else {
-                    str.characters.append(char)
+                    str.append(char)
                     advanceIndex()
                 }
             }
@@ -124,7 +124,7 @@ class H5Lexer {
         return index < input.endIndex ? input[index] : nil
     }
     func advanceIndex() {
-        input.characters.formIndex(after: &index)
+        input.formIndex(after: &index)
     }
     //跳过空格
 //    func advanceSpace() {

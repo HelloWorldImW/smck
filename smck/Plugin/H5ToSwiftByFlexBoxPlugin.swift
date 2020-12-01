@@ -271,7 +271,7 @@ class H5ToSwiftByFlexBoxPlugin {
         
         if tag.subs.count > 0 {
             for subTag in tag.subs {
-                if subTag.name.characters.count > 0 {
+                if subTag.name.count > 0 {
                     reStr.append(viewTagToSwift(tag: subTag, superTag: tag, superSName: sName))
                 }
             }

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RxSwift
 
 class UnUseMethodPlugin {
     var methodsUsed = [String]()           //用过的方法集合
@@ -23,7 +24,7 @@ class UnUseMethodPlugin {
 //                    self.console.outPrint("\(dic["filePaths"])")
                 }
                 if dic["currentParsingFileDes"] is String {
-                    Console.outPrint("\(dic["currentParsingFileDes"])")
+                    Console.outPrint("\(dic["currentParsingFileDes"] ?? "")")
                 }
                 if dic["firstRoundAFile"] is File {
                     let aFile = dic["firstRoundAFile"] as! File
@@ -44,7 +45,7 @@ class UnUseMethodPlugin {
                 }
                 
                 if dic.keys.contains("firstRoundUnUsedMethods") {
-                    Console.outPrint("\(dic["firstRoundUnUsedMethods"])")
+                    Console.outPrint("\(dic["firstRoundUnUsedMethods"] ?? "")")
                 }
                 
             }

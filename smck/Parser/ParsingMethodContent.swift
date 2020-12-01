@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RxSwift
 
 class ParsingMethodContent {
     class func parsing(method:Method, file:File) -> Observable<Any> {
@@ -104,7 +105,10 @@ class ParsingMethodContent {
                 prm.name = preTk
                 if prm.name != "" {
                     uMtdDic[psBrcStep]?.params.append(prm)
-                    uMtdDic[psBrcStep]?.pnameId = (uMtdDic[psBrcStep]?.pnameId.appending("\(prm.name):"))!
+                    if let pnameId: String = uMtdDic[psBrcStep]?.pnameId {
+                        uMtdDic[psBrcStep]?.pnameId = pnameId.appending("\(prm.name):")
+                    }
+                    
                 }
             } else if tk == Sb.qM {
                 psCdtTf = true

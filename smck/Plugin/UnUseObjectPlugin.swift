@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RxSwift
 
 class UnUseObjectPlugin {
     var allObjects = [String:Object]()
@@ -42,7 +43,7 @@ class UnUseObjectPlugin {
             var allUnUsedObjects = [String:Object]()
             for (key, value) in self.allObjects {
                 guard let _ = self.allUsedObjects[key] else {
-                    if value.category.characters.count > 0 || self.whiteList.contains(value.name) {
+                    if value.category.count > 0 || self.whiteList.contains(value.name) {
                     } else {
                         if key == "DCOrderlistMyTripSegmentViewController" {
                             

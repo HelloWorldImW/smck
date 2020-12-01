@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RxSwift
 
 class ParsingMacro {
     class func parsing(line:String) -> Macro {

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RxSwift
 
 class ParsingSecondRoundOneFile {
     class func parsing(aFile:File, allFiles:[String:File]) -> Observable<Any> {

@@ -36,7 +36,7 @@ class Checker {
     //静态
     func staticMode() {
         let argument = CommandLine.arguments[1]
-        let (option, value) = Console.getOption(argument.substring(from: argument.characters.index(argument.startIndex, offsetBy: 1)))
+        let (option, value) = Console.getOption(argument.substring(from: argument.index(argument.startIndex, offsetBy: 1)))
         let argValue = CommandLine.arguments[2]
         
         switch option {
@@ -73,7 +73,7 @@ class Checker {
     
     //无用类
     func doO(path:String) {
-        guard path.characters.count > 0 else {
+        guard path.count > 0 else {
             return
         }
         UnUseObjectPlugin().plug(ob: ParsingEntire.parsing(path: path))
@@ -82,7 +82,7 @@ class Checker {
     //无用函数
     func doM(path:String) {
         
-        guard path.characters.count > 0 else {
+        guard path.count > 0 else {
             return
         }
         UnUseMethodPlugin().plug(ob: ParsingEntire.parsing(path: path))
@@ -92,7 +92,7 @@ class Checker {
     
     //列出文件下
     func doF(path:String) {
-        guard path.characters.count > 0 else {
+        guard path.count > 0 else {
             return
         }
         let files = SeekFolderFiles.seekWith(path)

@@ -16,7 +16,7 @@ class CSSLexer {
         var newStr = ""
         let annotationBlockPattern = "/\\*[\\s\\S]*?\\*/" //匹配/*...*/这样的注释
         let regexBlock = try! NSRegularExpression(pattern: annotationBlockPattern, options: NSRegularExpression.Options(rawValue:0))
-        newStr = regexBlock.stringByReplacingMatches(in: input, options: NSRegularExpression.MatchingOptions(rawValue:0), range: NSMakeRange(0, input.characters.count), withTemplate: Sb.space)
+        newStr = regexBlock.stringByReplacingMatches(in: input, options: NSRegularExpression.MatchingOptions(rawValue:0), range: NSMakeRange(0, input.count), withTemplate: Sb.space)
         self.input = newStr
         self.index = newStr.startIndex
     }
@@ -59,7 +59,7 @@ class CSSLexer {
         return index < input.endIndex ? input[index] : nil
     }
     func advanceIndex() {
-        input.characters.formIndex(after: &index)
+        input.formIndex(after: &index)
     }
     func advanceSpace() {
         while let char = currentChar, char.isSpace {

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RxSwift
 
 class ParsingEntire {
     
@@ -158,7 +159,7 @@ class ParsingEntire {
                 }
                 //记录类的父类，作为已用类
                 for (_, value) in allObjects {
-                    if value.superName.characters.count > 0 {
+                    if value.superName.count > 0 {
                         guard let obj = allObjects[value.superName] else {
                             continue
                         }

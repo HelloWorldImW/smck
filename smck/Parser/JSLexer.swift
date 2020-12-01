@@ -48,7 +48,7 @@ class JSLexer {
                 if keyMap.contains(charStr) {
                     quite = true
                 } else {
-                    str.characters.append(char)
+                    str.append(char)
                     advanceIndex()
                 }
             }
@@ -61,6 +61,6 @@ class JSLexer {
         return index < input.endIndex ? input[index] : nil
     }
     func advanceIndex() {
-        input.characters.formIndex(after: &index)
+        input.formIndex(after: &index)
     }
 }

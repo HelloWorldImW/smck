@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RxSwift
 
 class ParsingFirstRoundOneFile {
     class func parsing(fileUrl:URL) -> Observable<Any> {
@@ -65,7 +66,7 @@ class ParsingFirstRoundOneFile {
                 //处理 #import start
                 if aLine.hasPrefix(Sb.importStr) {
                     let imp = ParsingImport.parsing(tokens: tokens)
-                    guard imp.fileName.characters.count > 0 else {
+                    guard imp.fileName.count > 0 else {
                         continue
                     }
                     aFile.imports.append(imp)
