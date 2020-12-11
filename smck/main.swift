@@ -9,9 +9,9 @@
 import Foundation
 
 let checker = Checker()
-if CommandLine.argc < 2 {
-    checker.interactiveModel()
-} else {
+//if CommandLine.argc < 2 {
+//    checker.interactiveModel()
+//} else {
     checker.staticMode()
-}
+//}
 

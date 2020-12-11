@@ -35,9 +35,11 @@ class Checker {
     
     //静态
     func staticMode() {
-        let argument = CommandLine.arguments[1]
-        let (option, value) = Console.getOption(argument.substring(from: argument.index(argument.startIndex, offsetBy: 1)))
-        let argValue = CommandLine.arguments[2]
+//        let argument = CommandLine.arguments[1]
+//        let (option, value) = Console.getOption(argument.substring(from: argument.index(argument.startIndex, offsetBy: 1)))
+//        let argValue = CommandLine.arguments[2]
+        let option = OptionType.unUseMethods
+        let argValue = "/Users/Joe/Desktop/Work/ZRCodeStandards/CodeStandardDemo"
         
         switch option {
         case .seekFile:
@@ -51,7 +53,7 @@ class Checker {
         case .help:
             Console.printUsage()
         case .unknown, .quit:
-            print("Unknown option\(value)")
+//            print("Unknown option\(value)")
             Console.printUsage()
         }
     }
